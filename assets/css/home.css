@@ -1,0 +1,59 @@
+.header {
+    padding: 10px;
+    border: none;
+    color: black;
+    border-radius: 0;
+    box-shadow: 1px 1px 20px 0px #afafaf;
+    margin-bottom: 31px;
+}
+
+.menu-list img {
+    width: 100%
+}
+
+.menu-list span{
+    font-size: 141%;
+}
+
+.menu-list .detail {
+    margin-bottom: 10px;
+}
+
+
+
+
+img.kanrelogo {
+	width: 200px;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #fffcfc;
+    cursor: default;
+    background-color: #ee5835;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+
+@media  only screen and (max-width: 700px) {
+	img.kanrelogo {
+		width: 100px;
+	}
+
+	.header {
+    
+    margin-bottom: 1px;
+	}
+
+	img.foto-mak {
+		vertical-align: middle;
+		
+
+	}
+
+	h3 {
+    margin-top: 2px;
+
+}
+
+	
+}
