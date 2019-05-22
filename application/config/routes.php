@@ -60,6 +60,7 @@ $route['login']['post'] = "Auth/login";
 // Admin
 $route['admin/dashboard']['get'] = "admin/dashboard/home";
 $route['admin/product']['get'] = "admin/dashboard/product";
+$route['admin/product']['post'] = "admin/dashboard/product";
 
 // Kasir
 $route['kasir/dashboard']['get'] = "kasir/dashboard/home";
