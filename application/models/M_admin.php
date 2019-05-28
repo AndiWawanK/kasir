@@ -24,4 +24,11 @@ class M_admin extends CI_Model{
     public function deleteProductById($id){
         return $this->db->delete("product", array("ID_product" => $id));
     }
+
+    public function getKaryawan(){
+        return $this->db->get("karyawan")->result_array();
+    }
+    public function insertKaryawan($data){
+        return $this->db->insert("karyawan", $data);
+    }
 }

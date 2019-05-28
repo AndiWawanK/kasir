@@ -62,6 +62,10 @@ $route['admin/dashboard']['get'] = "admin/dashboard/home";
 $route['admin/product']['get'] = "admin/dashboard/product";
 $route['admin/product']['post'] = "admin/dashboard/product";
 $route['admin/product/(:num)']['get'] = "admin/dashboard/deleteProduct/$1";
+$route['admin/karyawan']['get'] = "admin/dashboard/karyawan";
+$route['admin/tambah-karyawan']['get'] = "admin/dashboard/inputDataKaryawan";
+$route['admin/tambah-karyawan']['post'] = "admin/dashboard/inputDataKaryawan";
+
 // Ajax
 // $route['ajax/getproduct']['get'] = "admin/dashboard/filterProduct";
 $route['ajax/getproduct/(:num)']['get'] = "admin/dashboard/filterProduct/$1";
