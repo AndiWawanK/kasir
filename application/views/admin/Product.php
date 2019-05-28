@@ -27,7 +27,7 @@
                             </div>
                         </div> -->
                         <div class="clearfix"></div>
-                        <div class="row">
+                        <div class="row" id="row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="x_panel">
                                     <div class="row x_title">
@@ -36,15 +36,15 @@
                                         </div>
                                         <div class="col-md-4">
                                             <select name="" id="categoryId" onchange="filterProduct()" class="form-control pull-right" style="margin-top:5px;">
-                                                <option>All Product</option>
-                                                <?php foreach($category as $filter): ?>
+                                                <option value="reload" id="reload">All Product</option>
+                                                <?php foreach ($category as $filter) : ?>
                                                     <option value="<?= $filter['ID_category'] ?>"><?= $filter['nama_category'] ?></option>
                                                 <?php endforeach ?>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="row x_content">
-                                        <table class="table table-hover table-responsive">
+                                        <table class="table table-hover table-responsive" id="tableProduct">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -55,7 +55,18 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="showProduct">
-                                                
+                                                <?php foreach ($product as $products) : ?>
+                                                    <tr>
+                                                        <td><?= $products['ID_product'] ?></td>
+                                                        <td><?= $products['nama_product'] ?></td>
+                                                        <td><?= $products['nama_category'] ?></td>
+                                                        <td><?= $products['harga'] ?></td>
+                                                        <td>
+                                                            <button class='btn btn-warning btn-xs' data-toggle='modal' data-target='#editproduct<?= $products['ID_product'] ?>'><i class='fa fa-edit'></i> Edit</button>
+                                                            <a href='<?= base_url("admin/product/") . $products['ID_product'] ?>' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i> Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach ?>
                                             </tbody>
                                         </table>
                                         <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#tambahproduct"><i class="fa fa-plus-square-o"></i> Tambah Product</button>
@@ -212,63 +223,44 @@
 
     <?php $this->load->view('templates/script') ?>
     <script>
-        $(document).ready(function() {
-            defaultShow()
-            function defaultShow() {
-                fetch("<?= base_url('ajax/getproduct') ?>", {
-                    method: "GET"
-                }).then(res => {
-                    return res.json()
-                }).then(json => {
-                    // console.log(json.data)
+        var dataTab = $("#tableProduct").DataTable({
+            "aLengthMenu": [
+                [5, 10, 50],
+                [5, 10, 50]
+            ],
+        })
+
+        function filterProduct() {
+            let id = $("#categoryId option:selected").val()
+            if(id === "reload"){
+                location.reload()
+            }
+            fetch("<?= base_url('ajax/getproduct/') ?>" + id)
+                .then(res => res.json())
+                .then(json => {
                     let product = json.data
                     let table = ""
-                    for(let i = 0; i < product.length; i++){
-                        table += "<tr>"
-                        table += "<td>" + product[i].ID_product + "</td>"
-                        table += "<td>" + product[i].nama_product + "</td>"
-                        table += "<td>" + product[i].harga + "</td>"
-                        table += "<td>" + product[i].nama_category + "</td>"
-                        table += "<td>"
-                        table += "<button class='btn btn-warning btn-xs' data-toggle='modal' data-target='#editproduct"+ product[i].ID_product +"'><i class='fa fa-edit'></i> Edit</button>"
-                        table += "<a href='<?= base_url("admin/product/") ?>"+ product[i].ID_product +"' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i> Delete</a>"
+                    if (product.length === 0) {
+                        dataTab
+                            .clear()
+                            .draw();
+                    } else {
+                        for (let i = 0; i < product.length; i++) {
+                            table += "<tr>"
+                            table += "<td>" + product[i].ID_product + "</td>"
+                            table += "<td>" + product[i].nama_product + "</td>"
+                            table += "<td>" + product[i].harga + "</td>"
+                            table += "<td>" + product[i].nama_category + "</td>"
+                            table += "<td>"
+                            table += "<button class='btn btn-warning btn-xs' data-toggle='modal' data-target='#editproduct" + product[i].ID_product + "'><i class='fa fa-edit'></i> Edit</button>"
+                            table += "<a href='<?= base_url("admin/product/") ?>" + product[i].ID_product + "' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i> Delete</a>"
 
-                        table += "</td>"
-                        table += "</tr>"
-                        $("#showProduct").html(table);
+                            table += "</td>"
+                            table += "</tr>"
+                            $("#showProduct").html(table);
+                        }
                     }
-
                 })
-            }
-        })
-        function filterProduct(){
-            let id = $("#categoryId option:selected").val()
-            fetch("<?= base_url('ajax/getproduct/') ?>" + id,{
-                method: "GET"
-            }).then(res => {
-                return res.json()
-            }).then(json => {
-                let product = json.data
-                let table = ""
-                if(product.length === 0){
-                    alert("no data")
-                }else{
-                    for(let i = 0; i < product.length; i++){
-                        table += "<tr>"
-                        table += "<td>" + product[i].ID_product + "</td>"
-                        table += "<td>" + product[i].nama_product + "</td>"
-                        table += "<td>" + product[i].harga + "</td>"
-                        table += "<td>" + product[i].nama_category + "</td>"
-                        table += "<td>"
-                        table += "<button class='btn btn-warning btn-xs' data-toggle='modal' data-target='#editproduct"+ product[i].ID_product +"'><i class='fa fa-edit'></i> Edit</button>"
-                        table += "<a href='<?= base_url("admin/product/") ?>"+ product[i].ID_product +"' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i> Delete</a>"
-
-                        table += "</td>"
-                        table += "</tr>"
-                        $("#showProduct").html(table);
-                    }
-                }
-            })
         }
     </script>
 </body>

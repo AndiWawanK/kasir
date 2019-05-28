@@ -11,5 +11,13 @@
 <!-- NProgress -->
 <link href="<?php echo base_url("assets/css/nprogress.css") ?>" rel="stylesheet">
 
+<!-- DataTables -->
+
+<link href="<?php echo base_url("assets/css/dataTables.bootstrap.min.css") ?>" rel="stylesheet">
+<link href="<?php echo base_url("assets/css/buttons.bootstrap.min.css") ?>" rel="stylesheet">
+<link href="<?php echo base_url("assets/css/fixedHeader.bootstrap.min.css") ?>" rel="stylesheet">
+<link href="<?php echo base_url("assets/css/responsive.bootstrap.min.css") ?>" rel="stylesheet">
+<link href="<?php echo base_url("assets/css/scroller.bootstrap.min.css") ?>" rel="stylesheet">
+
 <!-- Custom Theme Style -->
 <link href="<?php echo base_url("assets/css/custom.min.css") ?>" rel="stylesheet">

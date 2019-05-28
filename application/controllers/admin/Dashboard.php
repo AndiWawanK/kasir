@@ -10,7 +10,7 @@ class Dashboard extends CI_Controller{
     }
     public function product(){
         $data['product'] = $this->madmin->getProduct($id = null);
-        $data['category'] = $this->madmin->getCategory();
+        $data['category'] = $this->madmin->getCategory();    
         $this->load->view('admin/Product',$data);
         if(isset($_POST['submit'])){
             $data = [
@@ -27,8 +27,7 @@ class Dashboard extends CI_Controller{
             redirect("admin/product");
         }
     }
-    // ajax request
-    // get all product & get product by category
+    // ajax filter product by category
     public function filterProduct($id = null){
         $data = $this->madmin->getProduct($id);
         $response = [
