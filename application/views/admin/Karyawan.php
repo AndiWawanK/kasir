@@ -87,7 +87,7 @@
                                                             <div class="panel panel-default">
                                                                 <div class="panel-heading">Detail Profile Karyawan</div>
                                                                 <div class="panel-body">
-                                                                    <table class="table table-bordered table-striped">
+                                                                    <table class="table table-bordered table-striped table-responsive">
                                                                         <tr>
                                                                             <td rowspan="8" style="width: 100px;">
                                                                                 <img src="<?= base_url("./foto/") . $row['foto'] ?>" style="widht: 100px; height: 100px;">
@@ -166,9 +166,9 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
+                                                        <!-- <div class="modal-footer">
                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -189,9 +189,9 @@
                                                         <form action="<?= base_url("admin/karyawan") ?>" method="post">
                                                             <div class="modal-body">
                                                                 <div class="panel panel-default">
-                                                                    <div class="panel-heading">Edit Profile Karyawan &nbsp;<span style="color: red">Note* <em>Foto dan Jenis Kelamin Tak dapat di Ubah!</em></span></div>
+                                                                    <div class="panel-heading">Edit Profile Karyawan &nbsp;<span style="color: red">Note* <em>Foto,Jenis Kelamin dan Tanggal Masuk Tak dapat di Ubah!</em></span></div>
                                                                     <div class="panel-body">
-                                                                        <table class="table table-bordered table-striped">
+                                                                        <table class="table table-bordered table-striped table-responsive">
                                                                             <tr>
                                                                                 <td rowspan="8" style="width: 100px;">
                                                                                     <img src="<?= base_url("./foto/") . $row['foto'] ?>" style="widht: 100px; height: 100px;">
@@ -201,6 +201,7 @@
                                                                                 </td>
                                                                                 <td>
                                                                                     <input type="text" name="nama" class="form-control" value="<?= $row['nama'] ?>">
+                                                                                    <input type="hidden" name="id_karyawan" value="<?= $row['ID_karyawan'] ?>">
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
@@ -271,7 +272,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-primary">Simpan Perubahan</button>
+                                                                <button type="submit" name="update" class="btn btn-primary">Simpan Perubahan</button>
                                                             </div>
                                                         </form>
                                                     </div>

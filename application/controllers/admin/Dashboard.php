@@ -55,6 +55,25 @@ class Dashboard extends CI_Controller{
     public function karyawan(){
         $data['karyawan'] = $this->madmin->getKaryawan();
         $this->load->view("admin/Karyawan",$data);
+        if(isset($_POST['update'])){
+            $idKaryawan = $this->input->post("id_karyawan");
+            $data = [
+                "nama" => htmlspecialchars($this->input->post("nama")),
+                "nik"  => htmlspecialchars($this->input->post("nik")),
+                "no_telp" => htmlspecialchars($this->input->post("no_telp")),
+                "alamat" => htmlspecialchars($this->input->post("alamat")),
+                "jabatan" => htmlspecialchars($this->input->post("jabatan")),
+                "status" => htmlspecialchars($this->input->post("status")),
+            ];
+            $check = $this->madmin->updateKaryawan($data,$idKaryawan);
+            if($check){
+                $this->session->set_flashdata("message", "Data Karyawan Berhasil di Ubah!");
+                redirect("admin/karyawan");
+            }else{
+                $this->session->set_flashdata("message", "Ada Masalah Saat Menyimpan Perubahan Data Karyawan!");
+                redirect("admin/karyawan");
+            }
+        }
     }
     public function inputDataKaryawan(){
         $this->load->view("admin/Input_karyawan");
@@ -81,18 +100,18 @@ class Dashboard extends CI_Controller{
             $this->load->library('upload', $config);
     
             if(!$this->upload->do_upload('gambar')){
-                $this->session->set_flashdata("message", "Ada Masalah Saat Mengupload Foto!");
+                $this->session->set_flashdata("error", "Ada Masalah Saat Mengupload Foto!");
                 redirect("admin/tambah-karyawan");
             }else{
                 $file = $this->upload->data();
                 $data["foto"] = $file['file_name'];
                 $check = $this->madmin->insertKaryawan($data);
                 if($check){
-                    $this->session->set_flashdata("message", "Data Karyawan Berhasil Ditambahkan!");
+                    $this->session->set_flashdata("error", "Data Karyawan Berhasil Ditambahkan!");
                     redirect("admin/tambah-karyawan");
                 }else{
-                    $this->session->set_flashdata("message", "Ada Masalah Saat Menambah Data Karyawan!");
-                    redirect("admin/tambah-karyawan");
+                    $this->session->set_flashdata("success", "Ada Masalah Saat Menambah Data Karyawan!");
+                    redirect("admin/karyawan");
                 }
             }
 

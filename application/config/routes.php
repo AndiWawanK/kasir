@@ -63,6 +63,7 @@ $route['admin/product']['get'] = "admin/dashboard/product";
 $route['admin/product']['post'] = "admin/dashboard/product";
 $route['admin/product/(:num)']['get'] = "admin/dashboard/deleteProduct/$1";
 $route['admin/karyawan']['get'] = "admin/dashboard/karyawan";
+$route['admin/karyawan']['post'] = "admin/dashboard/karyawan";
 $route['admin/tambah-karyawan']['get'] = "admin/dashboard/inputDataKaryawan";
 $route['admin/tambah-karyawan']['post'] = "admin/dashboard/inputDataKaryawan";
 

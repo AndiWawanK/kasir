@@ -133,17 +133,30 @@
                                                 </div>
                                             </div>
                                         </form>
-                                        <?php if ($this->session->flashdata("message") == "") { ?>
-                                            <div class="alert alert-success alert-dismissible fade in" role="alert" style="display:none">
+                                        <?php if ($this->session->flashdata("error") == "") { ?>
+                                            <div class="alert alert-danger alert-dismissible fade in" role="alert" style="display:none">
                                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
                                                 </button>
-                                                <p><?= $this->session->flashdata("message") ?></p>
+                                                <p><?= $this->session->flashdata("error") ?></p>
                                             </div>
                                         <?php } else { ?>
-                                            <div class="alert alert-success alert-dismissible fade in" role="alert">
+                                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
                                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
                                                 </button>
-                                                <p><?= $this->session->flashdata("message") ?></p>
+                                                <p><?= $this->session->flashdata("error") ?></p>
+                                            </div>
+                                        <?php } ?>
+                                        <?php if ($this->session->flashdata("success") == "") { ?>
+                                            <div class="alert alert-danger alert-dismissible fade in" role="alert" style="display:none">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                                                </button>
+                                                <p><?= $this->session->flashdata("success") ?></p>
+                                            </div>
+                                        <?php } else { ?>
+                                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                                                </button>
+                                                <p><?= $this->session->flashdata("success") ?></p>
                                             </div>
                                         <?php } ?>
                                     </div>

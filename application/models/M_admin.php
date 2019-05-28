@@ -31,4 +31,9 @@ class M_admin extends CI_Model{
     public function insertKaryawan($data){
         return $this->db->insert("karyawan", $data);
     }
+    public function updateKaryawan($data,$idKaryawan){
+        // $this->db->where("ID_karyawan", $idKaryawan);
+        // $this->db->update("karyawan",$data);
+        return $this->db->update("karyawan", $data, array("ID_karyawan" => $idKaryawan));
+    }
 }
