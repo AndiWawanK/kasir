@@ -71,6 +71,23 @@
                                             </tbody>
                                         </table>
                                         <a href="<?= base_url("admin/tambah-karyawan") ?>" class="btn btn-info btn-sm" name="input_karyawan"><i class="fa fa-plus-square-o"></i> Tambah Data Karyawan</a>
+                                        
+                                        <!-- Users Feedback Message  -->
+                                        <?php if($this->session->flashdata("success")){ ?>
+                                            <div class="alert alert-success alert-dismissible fade in" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                                                </button>
+                                                <p><?= $this->session->flashdata("success") ?></p>
+                                            </div>
+                                        <?php } ?>
+                                        <?php if($this->session->flashdata("error")){ ?>
+                                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                                                </button>
+                                                <p><?= $this->session->flashdata("success") ?></p>
+                                            </div>
+                                        <?php } ?>
+                                        <!-- Users Feedback Message  -->
 
                                         <!-- Modal Detail Karyawan -->
                                         <?php foreach ($karyawan as $row) : ?>

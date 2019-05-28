@@ -4,6 +4,9 @@ class Dashboard extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->load->model("M_admin","madmin");
+        if($this->session->userdata("level") != "admin" || $this->session->userdata("level") == ""){
+            redirect("login");
+        }
     }
     public function home(){
         $this->load->view('admin/Home');
@@ -67,10 +70,10 @@ class Dashboard extends CI_Controller{
             ];
             $check = $this->madmin->updateKaryawan($data,$idKaryawan);
             if($check){
-                $this->session->set_flashdata("message", "Data Karyawan Berhasil di Ubah!");
+                $this->session->set_flashdata("success", "Data Karyawan Berhasil di Ubah!");
                 redirect("admin/karyawan");
             }else{
-                $this->session->set_flashdata("message", "Ada Masalah Saat Menyimpan Perubahan Data Karyawan!");
+                $this->session->set_flashdata("error", "Ada Masalah Saat Menyimpan Perubahan Data Karyawan!");
                 redirect("admin/karyawan");
             }
         }
@@ -94,8 +97,6 @@ class Dashboard extends CI_Controller{
             $config['upload_path']   = './foto/';
             $config['allowed_types'] = 'jpg|png';
             $config['max_size']      = 1000;
-            $config['max_width']     = 1024;
-            $config['max_height']    = 768;
     
             $this->load->library('upload', $config);
     
@@ -107,16 +108,25 @@ class Dashboard extends CI_Controller{
                 $data["foto"] = $file['file_name'];
                 $check = $this->madmin->insertKaryawan($data);
                 if($check){
-                    $this->session->set_flashdata("error", "Data Karyawan Berhasil Ditambahkan!");
-                    redirect("admin/tambah-karyawan");
-                }else{
-                    $this->session->set_flashdata("success", "Ada Masalah Saat Menambah Data Karyawan!");
+                    $this->session->set_flashdata("success", "Data Karyawan Berhasil Ditambahkan!");
                     redirect("admin/karyawan");
+                }else{
+                    $this->session->set_flashdata("error", "Ada Masalah Saat Menambah Data Karyawan!");
+                    redirect("admin/tambah-karyawan");
                 }
             }
 
         }
 
-
+    }
+    public function logout(){
+        $data = [
+            "nama" => $this->session->userdata("nama"),
+            "username" => $this->session->userdata("username"),
+            "level" => $this->session->userdata("level"),
+        ];
+        $this->session->unset_userdata($data);
+        $this->session->sess_destroy();
+        redirect("login");
     }
 }

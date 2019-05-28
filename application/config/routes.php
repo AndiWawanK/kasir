@@ -58,6 +58,7 @@ $route['login']['get'] = "Auth/login";
 $route['login']['post'] = "Auth/login";
 
 // Admin
+$route['admin']['get'] = "admin/dashboard/home";
 $route['admin/dashboard']['get'] = "admin/dashboard/home";
 $route['admin/product']['get'] = "admin/dashboard/product";
 $route['admin/product']['post'] = "admin/dashboard/product";
@@ -66,7 +67,7 @@ $route['admin/karyawan']['get'] = "admin/dashboard/karyawan";
 $route['admin/karyawan']['post'] = "admin/dashboard/karyawan";
 $route['admin/tambah-karyawan']['get'] = "admin/dashboard/inputDataKaryawan";
 $route['admin/tambah-karyawan']['post'] = "admin/dashboard/inputDataKaryawan";
-
+$route['admin/dashboard/logout']['get'] = "admin/dashboard/logout";
 // Ajax
 // $route['ajax/getproduct']['get'] = "admin/dashboard/filterProduct";
 $route['ajax/getproduct/(:num)']['get'] = "admin/dashboard/filterProduct/$1";

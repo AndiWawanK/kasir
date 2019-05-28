@@ -25,6 +25,8 @@
                 <li>
                     <a href="<?= base_url('admin/product') ?>"><i class="fa fa-cubes"></i> Data Product</a>
                 </li>
+            <?php }else{ ?>
+
             <?php } ?>
         </ul>
     </div>
@@ -45,11 +47,13 @@
             </div>
 
             <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                    <a href="<?php echo base_url('matkul/dashboard/logout') ?>">Log Out
-                        &nbsp;<i class="fa fa-sign-out"></i>
-                    </a>
-                </li>
+                <?php if($this->session->userdata('level') == "admin"){ ?>
+                    <li class="">
+                        <a href="<?php echo base_url('admin/dashboard/logout') ?>">Log Out
+                            &nbsp;<i class="fa fa-sign-out"></i>
+                        </a>
+                    </li>
+                <?php } ?>
             </ul>
         </nav>
     </div>
