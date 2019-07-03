@@ -3,7 +3,7 @@
 
 <head>
     <?php $this->load->view("templates/head") ?>
-    <title>Product | Dashboard</title>
+    <title>Karyawan | Dashboard</title>
 </head>
 
 <body class="nav-md">
@@ -63,14 +63,15 @@
                                                         <?php } ?>
                                                         <td><?= $row['jabatan'] ?></td>
                                                         <td><?= $row['status'] ?></td>
-                                                        <td>
+                                                        <td align="center">
                                                             <button type="button" data-toggle='modal' data-target='#detail<?= $row['ID_karyawan'] ?>' class="btn btn-warning btn-xs"><i class="fa fa-eye"></i> Detail</button>
+                                                            <a href="<?= base_url("admin/dashboard/karyawan/delete/").$row["ID_karyawan"] ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach ?>
                                             </tbody>
                                         </table>
-                                        <a href="<?= base_url("admin/tambah-karyawan") ?>" class="btn btn-info btn-sm" name="input_karyawan"><i class="fa fa-plus-square-o"></i> Tambah Data Karyawan</a>
+                                        <a href="<?= base_url("admin/dashboard/karyawan/tambah-karyawan") ?>" class="btn btn-info btn-sm" name="input_karyawan"><i class="fa fa-plus-square-o"></i> Tambah Data Karyawan</a>
                                         
                                         <!-- Users Feedback Message  -->
                                         <?php if($this->session->flashdata("success")){ ?>
@@ -179,7 +180,7 @@
                                                                     </table>
                                                                 </div>
                                                                 <div class="panel-footer">
-                                                                    <button type="button" data-toggle='modal' data-target='#edit<?= $row['ID_karyawan'] ?>' data-dismiss="modal" class="btn btn-danger"><i class="fa fa-edit"></i> Edit Data Karyawan</button>
+                                                                    <button type="button" data-dismiss="modal" data-toggle='modal' data-target="#edit<?= $row['ID_karyawan'] ?>" class="btn btn-danger"><i class="fa fa-edit"></i> Edit Data Karyawan</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -203,7 +204,7 @@
                                                             </button>
                                                             <h4 class="modal-title" id="myModalLabel"><i class="fa fa-users"></i> Edit Data Karyawan</h4>
                                                         </div>
-                                                        <form action="<?= base_url("admin/karyawan") ?>" method="post">
+                                                        <form action="<?= base_url("admin/dashboard/karyawan") ?>" method="post">
                                                             <div class="modal-body">
                                                                 <div class="panel panel-default">
                                                                     <div class="panel-heading">Edit Profile Karyawan &nbsp;<span style="color: red">Note* <em>Foto,Jenis Kelamin dan Tanggal Masuk Tak dapat di Ubah!</em></span></div>
@@ -315,6 +316,7 @@
     <?php $this->load->view('templates/script') ?>
     <script>
         $("#tableKaryawan").DataTable()
+        $('.modal').css('overflow-y', 'auto');
     </script>
 </body>
 

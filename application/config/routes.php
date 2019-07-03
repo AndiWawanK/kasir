@@ -60,17 +60,26 @@ $route['login']['post'] = "Auth/login";
 // Admin
 $route['admin']['get'] = "admin/dashboard/home";
 $route['admin/dashboard']['get'] = "admin/dashboard/home";
-$route['admin/product']['get'] = "admin/dashboard/product";
-$route['admin/product']['post'] = "admin/dashboard/product";
-$route['admin/product/(:num)']['get'] = "admin/dashboard/deleteProduct/$1";
-$route['admin/karyawan']['get'] = "admin/dashboard/karyawan";
-$route['admin/karyawan']['post'] = "admin/dashboard/karyawan";
-$route['admin/tambah-karyawan']['get'] = "admin/dashboard/inputDataKaryawan";
-$route['admin/tambah-karyawan']['post'] = "admin/dashboard/inputDataKaryawan";
+// route product
+$route['admin/dashboard/product']['get'] = "admin/dashboard/product";
+$route['admin/dashboard/product/update']['post'] = "admin/dashboard/updateProduct";
+$route['admin/dashboard/product']['post'] = "admin/dashboard/product";
+$route['admin/dashboard/product/(:num)']['get'] = "admin/dashboard/deleteProduct/$1";
+// route karyawan
+$route['admin/dashboard/karyawan']['get'] = "admin/dashboard/karyawan";
+$route['admin/dashboard/karyawan']['post'] = "admin/dashboard/karyawan";
+$route['admin/dashboard/karyawan/tambah-karyawan']['get'] = "admin/dashboard/inputDataKaryawan";
+$route['admin/dashboard/karyawan/tambah-karyawan']['post'] = "admin/dashboard/inputDataKaryawan";
+$route['admin/dashboard/karyawan/delete/(:num)']['get'] = "admin/dashboard/deleteKaryawan/$1";
+// route gallery
+$route['admin/dashboard/gallery']['get'] = "admin/dashboard/gallery";
+$route['admin/dashboard/gallery/(:num)']['get'] = "admin/dashboard/gallery/$1";
 $route['admin/dashboard/logout']['get'] = "admin/dashboard/logout";
 // Ajax
 // $route['ajax/getproduct']['get'] = "admin/dashboard/filterProduct";
 $route['ajax/getproduct/(:num)']['get'] = "admin/dashboard/filterProduct/$1";
-
+$route['ajax/getdetailtransaction/(:num)']['get'] = "admin/dashboard/transaction_processing/$1";
 // Kasir
 $route['kasir/dashboard']['get'] = "kasir/dashboard/home";
+$route['kasir/dashboard']['post'] = "kasir/dashboard/booking";
+$route['kasir/dashboard/stock-product'] = "kasir/dashboard/productStock";

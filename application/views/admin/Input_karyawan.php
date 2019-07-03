@@ -3,7 +3,7 @@
 
 <head>
     <?php $this->load->view("templates/head") ?>
-    <title>Product | Dashboard</title>
+    <title>Karyawan | Dashboard</title>
 </head>
 
 <body class="nav-md">
@@ -37,7 +37,7 @@
                                     </div>
                                     <div class="row x_content">
 
-                                        <form action="<?= base_url("admin/tambah-karyawan") ?>" method="post" class="form-horizontal form-label-left" enctype="multipart/form-data">
+                                        <form action="<?= base_url("admin/dashboard/karyawan/tambah-karyawan") ?>" method="post" class="form-horizontal form-label-left" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">
                                                     Nama Lengkap
@@ -127,7 +127,7 @@
                                             <div class="ln_solid"></div>
                                             <div class="form-group">
                                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                                    <a href="<?= base_url("admin/karyawan") ?>" class="btn btn-danger" type="button">Back</a>
+                                                    <a href="<?= base_url("admin/dashboard/karyawan") ?>" class="btn btn-danger" type="button">Back</a>
                                                     <button class="btn btn-primary" type="reset">Reset</button>
                                                     <button type="submit" name="submit" class="btn btn-success">Submit</button>
                                                 </div>

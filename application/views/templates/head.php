@@ -19,5 +19,9 @@
 <link href="<?php echo base_url("assets/css/responsive.bootstrap.min.css") ?>" rel="stylesheet">
 <link href="<?php echo base_url("assets/css/scroller.bootstrap.min.css") ?>" rel="stylesheet">
 
+<!-- Dropzone -->
+<link rel="stylesheet" href="<?php echo base_url("assets/dropzone/min/basic.min.css") ?>">
+<link rel="stylesheet" href="<?php echo base_url("assets/dropzone/min/dropzone.min.css") ?>">
+
 <!-- Custom Theme Style -->
 <link href="<?php echo base_url("assets/css/custom.min.css") ?>" rel="stylesheet">

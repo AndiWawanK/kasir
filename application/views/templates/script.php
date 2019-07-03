@@ -17,6 +17,8 @@
     <script src="<?php echo base_url("assets/js/dataTables.responsive.min.js") ?>"></script>
     <script src="<?php echo base_url("assets/js/dataTables.scroller.min.js") ?>"></script>
 
+    <!-- Dropzone -->
+    <script src="<?php echo base_url("assets/dropzone/min/dropzone.min.js") ?>"></script>
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url("assets/js/custom.min.js")?>"></script>
 

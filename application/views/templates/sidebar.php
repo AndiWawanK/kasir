@@ -20,13 +20,21 @@
                     <a href="<?= base_url('admin/dashboard') ?>"><i class="fa fa-home"></i> Home</a>
                 </li>
                 <li>
-                    <a href="<?= base_url('admin/karyawan') ?>"><i class="fa fa-users"></i> Data Karyawan</a>
+                    <a href="<?= base_url('admin/dashboard/karyawan') ?>"><i class="fa fa-users"></i> Data Karyawan</a>
                 </li>
                 <li>
-                    <a href="<?= base_url('admin/product') ?>"><i class="fa fa-cubes"></i> Data Product</a>
+                    <a href="<?= base_url('admin/dashboard/product') ?>"><i class="fa fa-cubes"></i> Data Product</a>
+                </li>
+                <li>
+                    <a href="<?= base_url('admin/dashboard/gallery') ?>"><i class="fa fa-image"></i> Gallery</a>
                 </li>
             <?php }else{ ?>
-
+                <li>
+                    <a href="<?= base_url('kasir/dashboard') ?>"><i class="fa fa-shopping-cart"></i> Booking</a>
+                </li>
+                <li>
+                    <a href="<?= base_url('kasir/dashboard/stock-product') ?>"><i class="fa fa-cubes"></i> Product Stock</a>
+                </li>
             <?php } ?>
         </ul>
     </div>
@@ -50,6 +58,12 @@
                 <?php if($this->session->userdata('level') == "admin"){ ?>
                     <li class="">
                         <a href="<?php echo base_url('admin/dashboard/logout') ?>">Log Out
+                            &nbsp;<i class="fa fa-sign-out"></i>
+                        </a>
+                    </li>
+                <?php }elseif($this->session->userdata('level') == "kasir"){ ?>
+                    <li class="">
+                        <a href="<?php echo base_url('kasir/dashboard/logout') ?>">Log Out
                             &nbsp;<i class="fa fa-sign-out"></i>
                         </a>
                     </li>

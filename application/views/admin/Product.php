@@ -63,7 +63,7 @@
                                                         <td><?= $products['harga'] ?></td>
                                                         <td>
                                                             <button class='btn btn-warning btn-xs' data-toggle='modal' data-target='#editproduct<?= $products['ID_product'] ?>'><i class='fa fa-edit'></i> Edit</button>
-                                                            <a href='<?= base_url("admin/product/") . $products['ID_product'] ?>' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i> Delete</a>
+                                                            <a href='<?= base_url("admin/dashboard/product/") . $products['ID_product'] ?>' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i> Delete</a>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach ?>
@@ -94,7 +94,7 @@
                                                         </button>
                                                         <h4 class="modal-title" id="myModalLabel"><i class="fa fa-cubes"></i> Tambah Product</h4>
                                                     </div>
-                                                    <form action="<?= base_url("admin/product") ?>" method="post" class="form-horizontal form-label-left">
+                                                    <form action="<?= base_url("admin/dashboard/product") ?>" method="post" class="form-horizontal form-label-left">
                                                         <div class="modal-body">
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">
@@ -149,9 +149,9 @@
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                                                             </button>
-                                                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-cubes"></i> Tambah Product</h4>
+                                                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-cubes"></i> Edit Data Product</h4>
                                                         </div>
-                                                        <form action="<?= base_url("admin/product") ?>" method="post" class="form-horizontal form-label-left">
+                                                        <form action="<?= base_url("admin/dashboard/product/update") ?>" method="post" class="form-horizontal form-label-left">
                                                             <div class="modal-body">
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">
@@ -159,6 +159,7 @@
                                                                         <span class="required" style="color:red">*</span>
                                                                     </label>
                                                                     <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                        <input type="hidden" name="ID_product" required="required" class="form-control col-md-7 col-xs-12" value="<?= $productEdit['ID_product'] ?>">
                                                                         <input type="text" name="nama_product" required="required" class="form-control col-md-7 col-xs-12" value="<?= $productEdit['nama_product'] ?>">
                                                                     </div>
                                                                 </div>

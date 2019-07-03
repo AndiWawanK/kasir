@@ -4,9 +4,7 @@ class Auth extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->load->model("M_auth","mauth");
-        if($this->session->userdata("level") == ""){
-            redirect("Login");
-        }elseif($this->session->userdata("level") == "admin"){
+        if($this->session->userdata("level") == "admin"){
             redirect("admin/dashboard");
         }elseif($this->session->userdata("level") == "kasir"){
             redirect("kasir/dashboard");

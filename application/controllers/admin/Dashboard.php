@@ -9,7 +9,27 @@ class Dashboard extends CI_Controller{
         }
     }
     public function home(){
-        $this->load->view('admin/Home');
+        $customers = $this->madmin->getCustomers();
+        $productTerjual = $this->madmin->getProductTerjual();
+        $product = $this->madmin->getProduct($id = null);
+        $karyawan = $this->madmin->getKaryawan();
+        $transaction = $this->madmin->getTransaction();
+        $total = 0;
+        for($i = 0;$i<count($productTerjual); $i++){
+            $total += $productTerjual[$i]['jumlah']; 
+        }
+        $count['totalProduct'] = count($product);
+        $count['totalKaryawan'] = count($karyawan);
+        $count['totalCustomers'] = count($customers);
+        $count['productTerjual'] = $total;
+        $count['transaction'] = $transaction;
+        $this->load->view('admin/Home',$count);
+    }
+    public function transaction_processing($idBooking){
+        $data = $this->madmin->getDetailTransaction($idBooking);
+        $this->output
+             ->set_content_type('application/json')
+             ->set_output(json_encode($data));
     }
     public function product(){
         $data['product'] = $this->madmin->getProduct($id = null);
@@ -24,10 +44,23 @@ class Dashboard extends CI_Controller{
             $isSubmit = $this->madmin->createProduct($data);
             if($isSubmit){
                 $this->session->set_flashdata("message", "Product Berhasil Ditambahakan!");
-                redirect("admin/product");
+                redirect("admin/dashboard/product");
             }
             $this->session->set_flashdata("message", "Ada Masalah Saat Menambahkan Product!");
-            redirect("admin/product");
+            redirect("admin/dashboard/product");
+        }
+    }
+    public function updateProduct(){
+        $data = [
+            'nama_product' => htmlspecialchars($this->input->post("nama_product")),
+            'harga' => htmlspecialchars($this->input->post('harga')),
+            'ID_category' => $this->input->post("category"),
+            'ID_product' => $this->input->post("ID_product")
+        ];
+        $isUpdate = $this->madmin->updateProduct($data);
+        if($isUpdate){
+            $this->session->set_flashdata("message", "Product Berhasil Update!");
+            redirect("admin/dashboard/product");
         }
     }
     // ajax filter product by category
@@ -49,10 +82,10 @@ class Dashboard extends CI_Controller{
         $isDelete = $this->madmin->deleteProductById($id);
         if($isDelete){
             $this->session->set_flashdata("message", "Product Berhasil Dihapus!");
-            redirect("admin/product");
+            redirect("admin/dashboard/product");
         }
         $this->session->set_flashdata("message", "Ada Masalah Saat Menghapus Data!");
-        redirect("admin/product");
+        redirect("admin/dashboard/product");
     }
     
     public function karyawan(){
@@ -71,10 +104,10 @@ class Dashboard extends CI_Controller{
             $check = $this->madmin->updateKaryawan($data,$idKaryawan);
             if($check){
                 $this->session->set_flashdata("success", "Data Karyawan Berhasil di Ubah!");
-                redirect("admin/karyawan");
+                redirect("admin/dashboard/karyawan");
             }else{
                 $this->session->set_flashdata("error", "Ada Masalah Saat Menyimpan Perubahan Data Karyawan!");
-                redirect("admin/karyawan");
+                redirect("admin/dashboard/karyawan");
             }
         }
     }
@@ -102,22 +135,55 @@ class Dashboard extends CI_Controller{
     
             if(!$this->upload->do_upload('gambar')){
                 $this->session->set_flashdata("error", "Ada Masalah Saat Mengupload Foto!");
-                redirect("admin/tambah-karyawan");
+                redirect("admin/dashboard/karyawan/tambah-karyawan");
             }else{
                 $file = $this->upload->data();
                 $data["foto"] = $file['file_name'];
                 $check = $this->madmin->insertKaryawan($data);
                 if($check){
                     $this->session->set_flashdata("success", "Data Karyawan Berhasil Ditambahkan!");
-                    redirect("admin/karyawan");
+                    redirect("admin/dashboard/karyawan");
                 }else{
                     $this->session->set_flashdata("error", "Ada Masalah Saat Menambah Data Karyawan!");
-                    redirect("admin/tambah-karyawan");
+                    redirect("admin/dashboard/karyawan/tambah-karyawan");
                 }
             }
 
         }
 
+    }
+    public function deleteKaryawan($idKaryawan){
+        $isDelete = $this->madmin->deleteKaryawan($idKaryawan);
+        if($isDelete){
+            redirect("admin/dashboard/karyawan");
+        }
+    }
+    public function gallery($idImage = null){
+        $data["image"] = $this->madmin->getGallery();
+        $this->load->view("admin/gallery", $data);
+        if($idImage != null){
+            $isDelete = $this->madmin->deleteImage($idImage);
+            if($isDelete){
+                redirect("admin/dashboard/gallery");
+            }
+        }
+    }
+    public function gallery_upload(){
+        $config['upload_path']   = FCPATH.'/foto/gallery/';
+        $config['allowed_types'] = 'gif|jpg|png|ico';
+        $this->load->library('upload',$config);
+
+        if($this->upload->do_upload('userfile')){
+        	$nama=$this->upload->data('file_name');
+        	$this->db->insert('gallery',array('gambar'=>$nama));
+        }
+        if(isset($_POST["isUpload"])){
+            $this->session->set_flashdata("success", "Upload Berhasil!");
+            redirect("admin/dashboard/gallery");
+        }
+    }
+    public function export_xls(){
+        $this->load->view("admin/export");
     }
     public function logout(){
         $data = [
